@@ -31,3 +31,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: jonoh/raspberry-pi-os
+          readme-filepath: ./readme.md
