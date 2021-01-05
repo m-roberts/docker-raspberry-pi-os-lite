@@ -4,7 +4,9 @@ An unofficial Docker image for Raspberry Pi OS lite.
 
 ## Tags
 
-Tags mirror the OS release date. New versions are checked daily.
+Tags mirror the OS release date as defined by the [Foundation's download server](https://downloads.raspberrypi.org/operating-systems-categories.json). New versions are checked daily.
+
+Somewhat confusingly the Raspberry Pi OS download URLs includes two dates, so images are also tagged with the other date as `<date>-url`.
 
 ## Caveats
 
