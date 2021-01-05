@@ -1,4 +1,5 @@
-FROM debian:stable-slim AS downloader
+FROM --platform=$BUILDPLATFORM debian:stable-slim AS downloader
+ARG BUILDPLATFORM
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -7,8 +8,9 @@ RUN apt-get update && apt-get install -y \
 
 ARG OS_IMAGE_URL
 RUN curl -L "${OS_IMAGE_URL}" | zcat >/tmp/image && \
-    mkdir /pi && \
+    mkdir -p /pi/boot && \
     echo "copy-out / /pi" | guestfish -a /tmp/image -m /dev/sda2:/ --ro && \
+    echo "copy-out / /pi/boot" | guestfish -a /tmp/image -m /dev/sda1:/ --ro && \
     rm /tmp/image
 
 FROM scratch

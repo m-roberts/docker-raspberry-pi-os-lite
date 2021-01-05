@@ -34,17 +34,12 @@ if DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect "${DOCKER_REPO}:${ver
 fi
 
 # Build/tag/push
-docker build \
+docker buildx build --platform linux/arm/v7 \
     --build-arg OS_IMAGE_URL="$image_url" \
     -t "${DOCKER_REPO}:latest" \
     -t "${DOCKER_REPO}:${semver}" \
     -t "${DOCKER_REPO}:${version}" \
     -t "${DOCKER_REPO}:${url_version}-url" \
     -t "${DOCKER_REPO}:${url_semver}-url" \
+    --push \
     .
-
-docker push "${DOCKER_REPO}:latest"
-docker push "${DOCKER_REPO}:${semver}"
-docker push "${DOCKER_REPO}:${version}"
-docker push "${DOCKER_REPO}:${url_version}-url"
-docker push "${DOCKER_REPO}:${url_semver}-url"
