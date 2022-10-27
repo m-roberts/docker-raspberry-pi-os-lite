@@ -12,6 +12,11 @@ RUN curl -L "${OS_IMAGE_URL}" | xz -d - >/tmp/image && \
     echo "copy-out / /pi/boot" | guestfish -a /tmp/image -m /dev/sda1:/ --ro && \
     rm /tmp/image
 
+
 FROM scratch
 COPY --from=downloader /pi /
+
+USER pi
+WORKDIR /home/pi
+
 CMD ["bash"]
