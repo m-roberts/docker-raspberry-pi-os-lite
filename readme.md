@@ -4,7 +4,7 @@ An unofficial Docker image for Raspberry Pi OS lite.
 
 Modified from `jonohill/docker-raspberry-pi-os`:
 * No longer pushes to Docker Hub
-* Updated to handle RPi OS's `.img.xz` format (instead of `.gz`)
+* Updated to handle RPi OS's `.img.xz` format (instead of `.zip`)
 
 ## Caveats
 
