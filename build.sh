@@ -10,20 +10,16 @@ if ! jq --help >/dev/null; then
     exit 1
 fi
 
-export IMAGE_SLUG=raspberry-pi-os-32-bit
-export IMAGE_TITLE=Lite
-export DOCKER_PI_ARCH=linux/arm/v7
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+source "${DIR}.env"
 
-# Latest OS image?
+# Get latest OS image
 image="$(curl https://downloads.raspberrypi.org/operating-systems-categories.json | jq -c ".[] | select(.slug == \"${IMAGE_SLUG}\") | .images[] | select(.title | contains(\"${IMAGE_TITLE}\"))")"
 image_url="$(echo "$image" | jq -rc ".urlHttp")"
 
-
 # Build
-docker buildx build --platform ${DOCKER_PI_ARCH} \
+docker buildx build \
+    --platform ${DOCKER_PI_ARCH} \
     --build-arg OS_IMAGE_URL="${image_url}" \
     -t "${IMAGE_SLUG}" \
     .
-
-# Start shell
-# docker run -it --platform="${DOCKER_PI_ARCH}" "${IMAGE_SLUG}" bash
