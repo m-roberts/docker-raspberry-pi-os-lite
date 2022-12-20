@@ -19,4 +19,4 @@ COPY --from=downloader /pi /
 USER pi
 WORKDIR /home/pi
 
-CMD ["bash"]
+#CMD ["bash"]
