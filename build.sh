@@ -26,4 +26,4 @@ docker buildx build --platform ${DOCKER_PI_ARCH} \
     .
 
 # Start shell
-docker run -it --platform="${DOCKER_PI_ARCH}" "${IMAGE_SLUG}" bash
+# docker run -it --platform="${DOCKER_PI_ARCH}" "${IMAGE_SLUG}" bash
